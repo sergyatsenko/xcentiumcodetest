@@ -1,0 +1,25 @@
+﻿@model XCentium.Test.Web.Models.PageDataModel
+<h1>Page images &amp; top occuring words</h1>
+<form asp-controller="Home" asp-action="Index" method="post">
+    <div class="form-group">
+        @Html.LabelFor(model => model.PageUrl, new { @class = "control-label" })
+        <div class="row">
+            <input class="form-control" name="PageUrl" asp-for="PageUrl" />
+            <button type="submit" class="btn btn-primary">Go</button>
+        </div>
+    </div>
+    @Html.ValidationMessageFor(model => model.PageUrl, null, new { @class = "text-danger" })
+    @Html.ValidationMessage("ServerError", new { @class = "text-danger" })
+</form>
+
+@if (Model != null && Model.PageData != null)
+{
+    @Html.Partial("_Carousel", Model.PageData.Images)
+    @Html.Partial("_TableWithChart", Model.PageData.Words)
+}
+
+
+
+
+
+
